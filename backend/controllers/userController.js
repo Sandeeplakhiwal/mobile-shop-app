@@ -3,6 +3,7 @@ import { catchAsycnError } from "../utils/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { sendToken } from "../utils/sendToken.js";
 
+// User Registration controller
 export const register = catchAsycnError(async (req, res, next) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) {
@@ -20,4 +21,34 @@ export const register = catchAsycnError(async (req, res, next) => {
     password,
   });
   return sendToken(res, user, "Registered successfully", 201);
+});
+
+// User login controller
+export const login = catchAsycnError(async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new ErrorHandler("Please enter all fields", 400));
+  }
+  let user = await User.findOne({ email }).select("+password");
+  const isMatch = await user.comparePassword(password);
+  if (!isMatch) {
+    return next(new ErrorHandler("Incorrect email or password", 401));
+  }
+  return sendToken(res, user, "Logged in successfully", 200);
+});
+
+// User logout controller
+export const logout = catchAsycnError(async (req, res, next) => {
+  res
+    .status(200)
+    .cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
+    .json({
+      success: true,
+      message: "Logged out successfully",
+    });
 });
