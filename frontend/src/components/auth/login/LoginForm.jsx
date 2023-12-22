@@ -2,13 +2,13 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
-import { loginSchema } from "../../../schema/auth";
 import { useMutation } from "@tanstack/react-query";
-import { loginApi } from "../../../apis/auth";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { loadUser } from "../../../redux/slices/userSlice";
 import { Link } from "react-router-dom";
+import { loginSchema } from "../../../schema/auth";
+import { loginApi } from "../../../apis/auth";
+import { loadUser } from "../../../redux/slices/userSlice";
 
 // Styled Components for the LoginForm
 const LoginFormWrapper = styled.div`

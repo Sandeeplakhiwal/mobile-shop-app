@@ -1,17 +1,15 @@
-import LoginPage from "../components/auth/login/LoginPage";
-import SignUpPage from "../components/auth/signup/Signup";
-import Home from "../components/home/HomePage";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useDispatch, useSelector } from "react-redux";
 import { ProtectedRoute } from "protected-route-react";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getMyProfile } from "../apis/auth";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { loadUser } from "../redux/slices/userSlice";
-import Cookies from "js-cookie";
+import { getMyProfile } from "./apis/auth";
+import HomePage from "./components/home/HomePage";
+import SignUpPage from "./components/auth/signup/SignUp";
+import LoginPage from "./components/auth/login/LoginPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,7 +45,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Home
+            <HomePage
               isAuthenticated={isAuthenticated}
               user={user}
               userLoading={userLoading}

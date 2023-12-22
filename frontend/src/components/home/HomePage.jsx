@@ -4,15 +4,15 @@ import FilterBar from "./FilterBar/FilterBar";
 import styled from "styled-components";
 import { FaFilter } from "react-icons/fa";
 import ProductList from "./products/productList";
-import Loader from "../layout/loader";
 import { useQuery } from "@tanstack/react-query";
-import { server } from "../../redux/store";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { IoLogOutOutline } from "react-icons/io5";
-import { logoutApi } from "../../apis/auth";
 import { toast } from "react-hot-toast";
 import { useNavigate, redirect } from "react-router-dom";
+import { logoutApi } from "../../apis/auth";
+import { server } from "../../redux/store";
+import Loader from "../layout/loader";
 
 const FilterBtnBox = styled("div")`
   display: flex;
