@@ -10,6 +10,7 @@ import { getMyProfile } from "./apis/auth";
 import HomePage from "./components/home/HomePage";
 import SignUpPage from "./components/auth/signup/SignUp";
 import LoginPage from "./components/auth/login/LoginPage";
+import { loadUser } from "./redux/slices/userSlice";
 
 function App() {
   const dispatch = useDispatch();
