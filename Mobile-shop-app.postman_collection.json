@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "168a14fe-9f26-41fa-ad7b-01e7ada5ef22",
+		"name": "Mobile-shop-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29583065"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Govind\",\r\n    \"email\": \"govind@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{server}}/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"shantam@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{server}}/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{server}}/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile Role",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{server}}/admin/update-role/6583db3e4cf3d1ebbfef9dfb"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Add New Product --Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Huawei P40 Pro\",\r\n    \"description\": \"Premium phone with a versatile camera system.\",\r\n    \"price\": 899.99,\r\n    \"images\": [\r\n      {\"public_id\": \"p40pro_1\", \"url\": \"https://fdn2.gsmarena.com/vv/bigpic/huawei-p40-pro.jpg\"}\r\n    ],\r\n    \"processor\": \"Kirin 990\",\r\n    \"memory\": \"256GB\",\r\n    \"os\": \"EMUI 10\",\r\n    \"category\": \"Smartphone\",\r\n    \"stock\": 30\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{server}}/product/new"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/products?keyword=samsung&price[lt]=800&processor=apple&os=android&memory=256",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "samsung"
+								},
+								{
+									"key": "price[lt]",
+									"value": "800"
+								},
+								{
+									"key": "processor",
+									"value": "apple"
+								},
+								{
+									"key": "os",
+									"value": "android"
+								},
+								{
+									"key": "memory",
+									"value": "256"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
