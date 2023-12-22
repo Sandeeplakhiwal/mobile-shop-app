@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./slices/userSlice.js";
 import productSlice from "./slices/productSlice.js";
 
-export const server = "http://localhost:5000/api/v1";
+export const server = "https://dearshopservice.onrender.com/api/v1";
 
 export const store = configureStore({
   reducer: {
