@@ -6,6 +6,7 @@ import { sendToken } from "../utils/sendToken.js";
 // User Registration controller
 export const register = catchAsycnError(async (req, res, next) => {
   const { name, email, password } = req.body;
+  console.log(name, email, password);
   if (!name || !email || !password) {
     return next(new ErrorHandler("Please enter all fields", 400));
   }
@@ -51,4 +52,38 @@ export const logout = catchAsycnError(async (req, res, next) => {
       success: true,
       message: "Logged out successfully",
     });
+});
+
+// Update Profile Role --Admin
+export const updateProfileRole = catchAsycnError(async (req, res, next) => {
+  const { role } = req.body;
+  role = role.charAt(0).toUpperCase();
+  const { id } = req.params;
+  console.log("Role", role);
+  console.log("Id", id);
+  // if (!role) {
+  //   return next(new ErrorHandler("Enter Role"));
+  // }
+  // const user = await User.findByIdAndUpdate(
+  //   id,
+  //   { role },
+  //   {
+  //     new: true,
+  //     runValidators: true,
+  //     useFindAndModify: false,
+  //   }
+  // );
+  // await user.save();
+  return res.status(200).json({
+    success: true,
+    message: "Role updated successfully",
+  });
+});
+
+export const getMyProfile = catchAsycnError(async (req, res, next) => {
+  const user = req.user;
+  res.status(200).json({
+    success: true,
+    user,
+  });
 });
