@@ -6,7 +6,6 @@ import { sendToken } from "../utils/sendToken.js";
 // User Registration controller
 export const register = catchAsycnError(async (req, res, next) => {
   const { name, email, password } = req.body;
-  console.log(name, email, password);
   if (!name || !email || !password) {
     return next(new ErrorHandler("Please enter all fields", 400));
   }
@@ -59,8 +58,6 @@ export const updateProfileRole = catchAsycnError(async (req, res, next) => {
   const { role } = req.body;
   role = role.charAt(0).toUpperCase();
   const { id } = req.params;
-  console.log("Role", role);
-  console.log("Id", id);
   // if (!role) {
   //   return next(new ErrorHandler("Enter Role"));
   // }

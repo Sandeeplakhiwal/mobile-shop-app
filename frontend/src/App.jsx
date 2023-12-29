@@ -25,6 +25,7 @@ function App() {
     queryKey: ["user"],
     queryFn: getMyProfile,
     refetchOnWindowFocus: false,
+    staleTime: 10 * 1000,
   });
 
   useEffect(() => {
@@ -46,11 +47,13 @@ function App() {
         <Route
           path="/"
           element={
-            <HomePage
-              isAuthenticated={isAuthenticated}
-              user={user}
-              userLoading={userLoading}
-            />
+            <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login">
+              <HomePage
+                isAuthenticated={isAuthenticated}
+                user={user}
+                userLoading={false}
+              />
+            </ProtectedRoute>
           }
         />
         <Route

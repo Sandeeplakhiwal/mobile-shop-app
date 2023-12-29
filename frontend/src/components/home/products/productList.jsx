@@ -1,6 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../layout/loader";
+import { useDispatch } from "react-redux";
+import { AddToCart } from "../../../redux/slices/cartSlice";
+import toast from "react-hot-toast";
+
+// const ProductContainer = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-around;
+//   margin: 16px;
+// `;
+
+// const ProductCard = styled.div`
+//   background: #fff;
+//   border: 1px solid #ddd;
+//   border-radius: 8px;
+//   padding: 16px;
+//   margin: 16px;
+//   width: 200px;
+//   text-align: center;
+//   cursor: pointer;
+// `;
 
 const ProductContainer = styled.div`
   display: flex;
@@ -49,8 +70,35 @@ const ProductPrice = styled.p`
   margin: 8px 0;
 `;
 
+const AddToCartButton = styled.button`
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-top: 8px;
+  cursor: pointer;
+  margin-right: 2px;
+`;
+
+const BuyNowButton = styled.button`
+  background-color: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  margin-top: 8px;
+  cursor: pointer;
+`;
+
 const ProductList = ({ productsLoading, products }) => {
   const filteredProducts = products ? products : [];
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(AddToCart());
+    toast.success("Item added to cart");
+  };
 
   return (
     <ProductContainer>
@@ -67,6 +115,10 @@ const ProductList = ({ productsLoading, products }) => {
               <DetailLabel>OS: {product.os}</DetailLabel>
             </ProductDetails>
             <ProductPrice>₹{Math.floor(product.price)}</ProductPrice>
+            <AddToCartButton onClick={handleAddToCart}>
+              Add to Cart
+            </AddToCartButton>
+            <BuyNowButton>Buy Now</BuyNowButton>
           </ProductCard>
         ))
       ) : (

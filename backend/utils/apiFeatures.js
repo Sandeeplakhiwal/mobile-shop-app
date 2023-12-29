@@ -12,20 +12,16 @@ export class ApiFeatures {
           },
         }
       : {};
-    console.log("Keyword", keyword);
     this.query = this.query.find({ ...keyword });
     return this;
   }
   filter() {
     const queryCopy = { ...this.queryStr };
-    console.log("queryCopy", queryCopy);
-
     const removeFields = ["keyword"];
     removeFields.forEach((key) => delete queryCopy[key]);
 
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
-    console.log("query str", queryStr);
 
     const filters = Object.entries(JSON.parse(queryStr)).reduce(
       (acc, [key, value]) => {

@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import {
-  FaSearch,
-  FaBell,
-  FaShoppingCart,
-  FaUser,
-  FaSignInAlt,
-} from "react-icons/fa";
+import { FaSignInAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadFilters } from "../../redux/slices/productSlice";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import LoginIcon from "@mui/icons-material/Login";
+import { Badge } from "@mui/material";
 
 const HeaderContainer = styled.div`
   background-color: #6a1b9a;
@@ -18,7 +16,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  @media (max-width: 768px) {
+  @media (max-width: 424px) {
     padding: 10px;
     width: 95vw;
   }
@@ -42,7 +40,7 @@ const SearchBar = styled.input`
   border-radius: 4px;
   font-size: 16px;
   @media (max-width: 768px) {
-    margin: 0 4px;
+    margin: 0 1px;
     width: 80%;
   }
 `;
@@ -57,6 +55,20 @@ const Icon = styled.div`
   font-size: 24px;
   margin-left: 16px;
   cursor: pointer;
+  padding-top: -20px;
+  // background-color: orange;
+  @media (max-width: 768px) {
+    font-size: 20px;
+    margin-left: 12px;
+  }
+`;
+const IconWithBadge = styled.div`
+  color: #fff;
+  font-size: 24px;
+  margin-left: 16px;
+  cursor: pointer;
+  margin-top: -10px;
+  // background-color: orange;
   @media (max-width: 768px) {
     font-size: 20px;
     margin-left: 12px;
@@ -65,6 +77,8 @@ const Icon = styled.div`
 
 const Header = ({ isAuthenticated, user }) => {
   const [keyword, setKeyword] = useState("");
+
+  const { cartItems } = useSelector((state) => state.cart);
 
   let name = user ? user.name : "User Name";
   name = name.split(" ");
@@ -91,17 +105,22 @@ const Header = ({ isAuthenticated, user }) => {
         placeholder="Search products..."
       />
       <IconContainer>
-        <Icon>
-          <FaBell />
-        </Icon>
-        <Icon>
-          <FaShoppingCart />
-        </Icon>
+        <IconWithBadge>
+          <Badge variant={"dot"} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconWithBadge>
+        <IconWithBadge>
+          <Badge
+            badgeContent={cartItems}
+            invisible={cartItems > 0 ? false : true}
+            color="error"
+          >
+            <ShoppingCartIcon />
+          </Badge>
+        </IconWithBadge>
         {isAuthenticated ? (
           <>
-            {/* <Icon>
-                <FaUser />
-              </Icon> */}
             <p
               style={{
                 display: "flex",
@@ -125,7 +144,7 @@ const Header = ({ isAuthenticated, user }) => {
           <>
             <Link to={"/login"}>
               <Icon>
-                <FaSignInAlt />
+                <LoginIcon />
               </Icon>
             </Link>
           </>
