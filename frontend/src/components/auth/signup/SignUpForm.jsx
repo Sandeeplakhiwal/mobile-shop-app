@@ -152,8 +152,12 @@ const SignUpForm = () => {
           <ErrorParagraph>{errors.password}</ErrorParagraph>
         ) : null}
       </InputWrapper>
-      <Button type="submit" onClick={handleSubmit}>
-        Sign Up
+      <Button
+        type="submit"
+        onClick={handleSubmit}
+        disabled={isPending ? true : false}
+      >
+        {isPending ? "Loading..." : "Sign Up"}
       </Button>
       <SignInLink>
         Already have an account?{" "}

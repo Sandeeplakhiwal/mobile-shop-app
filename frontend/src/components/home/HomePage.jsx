@@ -132,6 +132,10 @@ const HomePage = ({ isAuthenticated, user, userLoading }) => {
     }
   }, [error, logoutSuccess, logoutData]);
 
+  useEffect(() => {
+    document.title = "Buy Mobiles";
+  });
+
   return (
     <div>
       <Header

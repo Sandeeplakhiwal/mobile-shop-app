@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import SignUpForm from "./SignUpForm";
 
@@ -21,6 +21,9 @@ const SignUpContainer = styled.div`
 `;
 
 const SignUpPage = () => {
+  useEffect(() => {
+    document.title = "Sign-Up";
+  });
   return (
     <SignUpPageWrapper>
       <SignUpContainer>

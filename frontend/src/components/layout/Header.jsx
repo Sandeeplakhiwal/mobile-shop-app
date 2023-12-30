@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaSignInAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -91,6 +91,14 @@ const Header = ({ isAuthenticated, user }) => {
       dispatch(loadFilters({ name: keyword }));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    dispatch(loadFilters({ name: keyword }));
+  }, [keyword]);
 
   return (
     <HeaderContainer>

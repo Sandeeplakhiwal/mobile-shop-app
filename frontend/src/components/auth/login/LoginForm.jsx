@@ -143,7 +143,7 @@ const LoginForm = () => {
         onClick={handleSubmit}
         disabled={isPending ? true : false}
       >
-        Login
+        {isPending ? "Loading..." : "Log In"}
       </Button>
       <SignUpLink>
         New User?{" "}

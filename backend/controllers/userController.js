@@ -30,6 +30,7 @@ export const login = catchAsycnError(async (req, res, next) => {
     return next(new ErrorHandler("Please enter all fields", 400));
   }
   let user = await User.findOne({ email }).select("+password");
+  if (!user) return next(new ErrorHandler("Incorrect email or password", 401));
   const isMatch = await user.comparePassword(password);
   if (!isMatch) {
     return next(new ErrorHandler("Incorrect email or password", 401));
